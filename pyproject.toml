@@ -1,0 +1,18 @@
+[project]
+name = "marketplace-skill-agent"
+version = "0.1.0"
+description = "ERC-8183 Skill Marketplace — AI agent skills sold per-call on BNB Chain"
+requires-python = ">=3.10"
+dependencies = [
+    "bnbagent>=0.4.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "httpx>=0.25.0",
+    "python-dotenv>=1.0.0",
+    "web3>=6.15.0",
+]
+
+[project.scripts]
+marketplace-skill = "src.server:main"
+marketplace-settle = "src.auto_settle:main"
+marketplace-register = "src.register:main"
