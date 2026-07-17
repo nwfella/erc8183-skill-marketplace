@@ -2,6 +2,7 @@
 
 from .liquidity_depth import analyze_pair_handler
 from .rug_risk import rug_risk_handler
+from .wallet_profiler import wallet_profiler_handler
 
 # Registry: skill_id -> (handler_fn, service_price_in_wei, description)
 # handler_fn(job_description: str) -> tuple[str, dict]  (result_string, metadata)
@@ -17,6 +18,12 @@ SKILL_REGISTRY = {
         "price_wei": 1_000_000_000_000_000_000,  # 1.0 U
         "description": "Check a BSC token for rug-pull risk factors: honeypot, liquidity lock, mint authority, holder concentration. Input: {\"token\": \"0x...\"}",
         "tags": ["security", "token", "risk", "bsc"],
+    },
+    "wallet-profiler": {
+        "handler": wallet_profiler_handler,
+        "price_wei": 1_500_000_000_000_000_000,  # 1.5 U
+        "description": "Profile a BSC wallet address: holdings (top ~40 tokens), net worth estimate, LP positions, protocol footprint, and behavioral classification (Whale/Trader/Bot/Degen). Input: {\"address\": \"0x...\"}",
+        "tags": ["analytics", "wallet", "portfolio", "bsc", "classification"],
     },
 }
 

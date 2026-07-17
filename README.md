@@ -12,6 +12,7 @@ A **provider agent** that exposes on-chain skills via the ERC-8183 protocol. Any
 |-------|-------|-------------|
 | `liquidity-depth` | 0.5 U | Analyzes a PancakeSwap V2 pair's liquidity depth, price impact at 1%/5%/10% slippage, optimal trade size, and concentration risk |
 | `rug-risk` | 1.0 U | Checks a BSC token for rug-pull indicators: mint authority, LP lock status, honeypot patterns, holder concentration |
+| `wallet-profiler` | 1.5 U | Profiles any BSC wallet: top token holdings, estimated net worth, LP positions, protocol footprint, and behavioral classification (Whale/Bot/Trader/Degen/Newbie) |
 
 ## Architecture
 
