@@ -8,11 +8,12 @@ A **provider agent** that exposes on-chain skills via the ERC-8183 protocol. Any
 
 ### Skills Available
 
-| Skill | Price | What it does |
-|-------|-------|-------------|
-| `liquidity-depth` | 0.5 U | Analyzes a PancakeSwap V2 pair's liquidity depth, price impact at 1%/5%/10% slippage, optimal trade size, and concentration risk |
-| `rug-risk` | 1.0 U | Checks a BSC token for rug-pull indicators: mint authority, LP lock status, honeypot patterns, holder concentration |
-| `wallet-profiler` | 1.5 U | Profiles any BSC wallet: top token holdings, estimated net worth, LP positions, protocol footprint, and behavioral classification (Whale/Bot/Trader/Degen/Newbie) |
+| Skill | Price | USD | What it does |
+|-------|-------|-----|-------------|
+| `wallet-profiler` | 0.03 U | ~$0.03 | Profile a BSC wallet: holdings, behavioral classification, risk flags |
+| `liquidity-depth` | 0.05 U | ~$0.05 | Analyze PancakeSwap V2 pair liquidity depth, price impact, optimal trade size |
+| `rug-risk` | 0.08 U | ~$0.08 | Check BSC token for rug-pull indicators: honeypot, liquidity lock, holder concentration |
+| `mev-check` | 0.10 U | ~$0.10 | *(coming soon)* Check if a pending transaction is likely to be sandwiched |
 
 ## Architecture
 
@@ -125,7 +126,7 @@ def your_handler(job_description: str) -> tuple[str, dict]:
 ```python
 "your-skill": {
     "handler": your_handler,
-    "price_wei": 750_000_000_000_000_000,  # 0.75 U
+    "price_wei": 50_000_000_000_000_000,  # 0.05 U (~$0.05)
     "description": "...",
     "tags": ["...", "..."],
 }
@@ -136,10 +137,10 @@ That's it. The server picks it up automatically.
 ## How ERC-8183 Gets Us Paid
 
 1. **Client** finds our agent card, picks `liquidity-depth`
-2. **Client** calls `negotiate-erc8183-job` → gets a signed quote for 0.5 U
-3. **Client** creates an on-chain job: `createJob(provider=us, ...)` → `fund(0.5 U)` → tokens locked in escrow
+2. **Client** calls `negotiate-erc8183-job` → gets a signed quote for 0.05 U
+3. **Client** creates an on-chain job: `createJob(provider=us, ...)` → `fund(0.05 U)` → tokens locked in escrow
 4. **Our server** detects the funded job via poll loop → runs the skill handler → `submit_result()`
-5. **Either party** calls `settle()` after dispute window → verdict = APPROVE (silence = approval) → **0.5 U released to us**
+5. **Either party** calls `settle()` after dispute window → verdict = APPROVE (silence = approval) → **0.05 U released to us**
 6. If client disputes, a whitelisted voter panel decides. Bad dispute = they lose the fee.
 
 No payment infra, no chargebacks, no subscription management. We get paid when we deliver.

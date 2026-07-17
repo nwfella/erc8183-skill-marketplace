@@ -51,7 +51,7 @@ Required fields on mainnet:
 |----------|-------|-------|
 | `WALLET_PASSWORD` | Your keystore password | Never share this |
 | `NETWORK` | `bsc` | NOT bsc-testnet |
-| `ERC8183_SERVICE_PRICE` | `500000000000000000` (0.5 U) | Adjust per skill |
+| `ERC8183_SERVICE_PRICE` | `50000000000000000` (0.05 U) | Adjust per skill |
 | `A2A_BASE_URL` | `https://your-public-url.com` | Must be internet-reachable |
 | `ERC8183_AGENT_URL` | `https://your-public-url.com/erc8183` | Same as above + /erc8183 |
 
@@ -117,7 +117,7 @@ python examples/client.py \
   --skill liquidity-depth \
   --pair 0x0eD7e52944161450477ee417DE9Cd3a859b14fD0 \
   --provider 0xYOUR_WALLET_ADDRESS \
-  --price-wei 500000000000000000
+  --price-wei 50000000000000000
 ```
 
 Expected flow:
@@ -170,10 +170,10 @@ Example skill prices:
 
 | Skill | Price | Margin |
 |-------|-------|--------|
-| liquidity-depth | 0.5 U | ~100% (pure on-chain reads) |
-| rug-risk | 1.0 U | ~100% (pure on-chain reads) |
-| MEV sandwich check | 0.25 U | ~100% (mempool data) |
-| Custom whitelabel | Negotiable | Charge what the market bears |
+| liquidity-depth | 0.05 U | ~100% (pure on-chain reads) |
+| rug-risk | 0.08 U | ~100% (pure on-chain reads) |
+| wallet-profiler | 0.03 U | ~100% (pure on-chain reads) |
+| MEV sandwich check | 0.10 U | ~100% (mempool data) |
 
 ---
 
@@ -192,13 +192,13 @@ Example skill prices:
 
 ## Cost Summary
 
-| Item | Cost |
-|------|------|
-| BNB for gas (initial) | ~0.01–0.05 BNB (~$5-30) |
-| ERC-8004 registration | ~$1-2 one-time |
-| Per-job gas (submit + settle) | ~$0.02-0.05 |
-| VPS hosting (optional) | ~$5-10/month |
-| **Total to start** | **~$10-40** |
+|| Item | Cost |
+||------|------|
+|| BNB for gas (initial) | ~0.01–0.05 BNB (~$5-30) |
+|| ERC-8004 registration | ~$1-2 one-time |
+|| Per-job gas (submit + settle) | ~$0.02-0.05 |
+|| VPS hosting (optional) | ~$5-10/month |
+|| **Total to start** | **~$10-30** |
 
 ---
 

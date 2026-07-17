@@ -7,23 +7,23 @@ from .wallet_profiler import wallet_profiler_handler
 # Registry: skill_id -> (handler_fn, service_price_in_wei, description)
 # handler_fn(job_description: str) -> tuple[str, dict]  (result_string, metadata)
 SKILL_REGISTRY = {
+    "wallet-profiler": {
+        "handler": wallet_profiler_handler,
+        "price_wei": 30_000_000_000_000_000,  # 0.03 U (~$0.03)
+        "description": "Profile a BSC wallet address: holdings, net worth estimate, behavioral classification, and risk flags. Input: {\"address\": \"0x...\"}",
+        "tags": ["analytics", "wallet", "portfolio", "bsc", "classification"],
+    },
     "liquidity-depth": {
         "handler": analyze_pair_handler,
-        "price_wei": 500_000_000_000_000_000,  # 0.5 U
+        "price_wei": 50_000_000_000_000_000,  # 0.05 U (~$0.05)
         "description": "Analyze a PancakeSwap V2 pair's liquidity depth, price impact, and optimal trade size. Input: {\"pair\": \"0x...\"}",
         "tags": ["defi", "liquidity", "bsc", "pancakeswap"],
     },
     "rug-risk": {
         "handler": rug_risk_handler,
-        "price_wei": 1_000_000_000_000_000_000,  # 1.0 U
+        "price_wei": 80_000_000_000_000_000,  # 0.08 U (~$0.08)
         "description": "Check a BSC token for rug-pull risk factors: honeypot, liquidity lock, mint authority, holder concentration. Input: {\"token\": \"0x...\"}",
         "tags": ["security", "token", "risk", "bsc"],
-    },
-    "wallet-profiler": {
-        "handler": wallet_profiler_handler,
-        "price_wei": 1_500_000_000_000_000_000,  # 1.5 U
-        "description": "Profile a BSC wallet address: holdings (top ~40 tokens), net worth estimate, LP positions, protocol footprint, and behavioral classification (Whale/Trader/Bot/Degen). Input: {\"address\": \"0x...\"}",
-        "tags": ["analytics", "wallet", "portfolio", "bsc", "classification"],
     },
 }
 
